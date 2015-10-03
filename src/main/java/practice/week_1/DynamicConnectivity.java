@@ -1,13 +1,28 @@
 package practice.week_1;
 
 
-public interface DynamicConnectivity<Integer> {
+import java.util.List;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-    void union(Integer from, Integer to);
+import static java.util.stream.Collectors.toList;
 
-    boolean isConnected(Integer from, Integer to);
+public interface DynamicConnectivity<T> {
+
+    void union(T from, T to);
+
+    boolean isConnected(T from, T to);
 
     int count();
 
-    Integer find(Integer val);
+    T find(T val);
+
+    default List<T> initSource(int size, T seed, UnaryOperator<T> operator) {
+        return  Stream.iterate(seed, operator).
+                limit(size).
+                collect(toList());
+    }
 }

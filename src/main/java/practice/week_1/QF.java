@@ -1,7 +1,5 @@
 package practice.week_1;
 
-import java.util.stream.Stream;
-
 /**
  * Quick Find Algorithm
  */
@@ -9,14 +7,11 @@ import java.util.stream.Stream;
 public class QF implements DynamicConnectivity<Integer> {
 
     private final int size;
-    private final Integer[] source;
+    private Integer[] source;
 
     public QF(int size) {
         this.size = size;
-        source = Stream.iterate(0, i -> i + 1).
-                limit(size).
-                toArray(Integer[]::new);
-
+        source = initSource(size, 0, i -> i + 1).toArray(new Integer[]{});
     }
 
     @Override
