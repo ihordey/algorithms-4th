@@ -14,6 +14,8 @@ import static org.junit.Assert.assertTrue;
 public class QFTest {
 
     public static final String PATH_TO_TINY_UF_TXT = "/week_1/tinyUF.txt";
+    public static final String PATH_TO_MEDIUM_UF_TXT = "/week_1/mediumUF.txt";
+    public static final String PATH_TO_LARGE_UF_TXT = "/week_1/largeUF.txt";
 
     @Test
     public void haveToBeUnion() throws Exception {
