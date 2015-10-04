@@ -19,7 +19,6 @@ public class QFTest {
 
     @Test
     public void haveToBeUnion() throws Exception {
-        //TODO   implemented as common test
         Path path = Paths.get(getClass().getResource(PATH_TO_TINY_UF_TXT).toURI());
         List<String> lines = FilesTest.readFile(path);
 
