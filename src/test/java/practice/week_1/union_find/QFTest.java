@@ -3,7 +3,6 @@ package practice.week_1.union_find;
 import org.junit.Assert;
 import org.junit.Test;
 import practice.common.FilesTest;
-import practice.week_1.union_find.QF;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,9 +13,9 @@ import static practice.common.FilesTest.convertToPairs;
 
 public class QFTest {
 
-    public static final String PATH_TO_TINY_UF_TXT = "/week_1/tinyUF.txt";
-    public static final String PATH_TO_MEDIUM_UF_TXT = "/week_1/mediumUF.txt";
-    public static final String PATH_TO_LARGE_UF_TXT = "/week_1/largeUF.txt";
+    public static final String PATH_TO_TINY_UF_TXT = "/week_1/union_find/tinyUF.txt";
+    public static final String PATH_TO_MEDIUM_UF_TXT = "/week_1/union_find/mediumUF.txt";
+    public static final String PATH_TO_LARGE_UF_TXT = "/week_1/union_find/largeUF.txt";
 
     @Test
     public void haveToBeUnion() throws Exception {
