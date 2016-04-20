@@ -1,17 +1,14 @@
-package practice.week_1;
+package practice.week_1.union_find;
 
 
-import java.util.stream.Stream;
+public class QU implements DynamicConnectivity<Integer> {
 
-public class QUW implements DynamicConnectivity<Integer> {
     private final int size;
-    private Integer[] source;
-    private Integer[] weight;
+    private final Integer[] source;
 
-    public QUW(int size) {
+    public QU(int size) {
         this.size = size;
         this.source = initSource(size, 0, i -> i + 1).toArray(new Integer[]{});
-        this.weight = Stream.generate(() -> 1).limit(size).toArray(s -> new Integer[s]);
     }
 
     @Override
@@ -19,13 +16,8 @@ public class QUW implements DynamicConnectivity<Integer> {
         if (isConnected(from, to)) return;
         Integer fromVal = find(from);
         Integer toVal = find(to);
-        if (weight[fromVal] > weight[to]) {
-            source[toVal] = source[fromVal];
-            weight[fromVal] += weight[toVal];
-        } else {
-            source[fromVal] = source[toVal];
-            weight[toVal] += weight[fromVal];
-        }
+
+        source[toVal] = fromVal;
     }
 
     @Override
@@ -40,7 +32,7 @@ public class QUW implements DynamicConnectivity<Integer> {
 
     @Override
     public Integer find(Integer val) {
-        while (source[val] != val) {
+        while (!source[val].equals(val)) {
             val = source[val];
         }
         return val;

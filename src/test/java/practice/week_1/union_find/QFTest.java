@@ -1,8 +1,9 @@
-package practice.week_1;
+package practice.week_1.union_find;
 
 import org.junit.Assert;
 import org.junit.Test;
 import practice.common.FilesTest;
+import practice.week_1.union_find.QF;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 import static practice.common.FilesTest.convertToPairs;
 
-public class QUWTest {
+public class QFTest {
 
     public static final String PATH_TO_TINY_UF_TXT = "/week_1/tinyUF.txt";
     public static final String PATH_TO_MEDIUM_UF_TXT = "/week_1/mediumUF.txt";
@@ -25,11 +26,12 @@ public class QUWTest {
         List<Integer[]> points = convertToPairs(lines);
         Assert.assertEquals(11, points.size());
 
-        QUW qf = new QUW(Integer.parseInt(lines.get(0)));
+        QF qf = new QF(Integer.parseInt(lines.get(0)));
         points.forEach(p -> {
             qf.union(p[0], p[1]);
 //            System.out.println(p[0] + " " + p[1]);
             assertTrue(qf.isConnected(p[0], p[1]));
         });
     }
+
 }

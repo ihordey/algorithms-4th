@@ -1,4 +1,4 @@
-package practice.week_1;
+package practice.week_1.union_find;
 
 /**
  * Quick Find Algorithm
