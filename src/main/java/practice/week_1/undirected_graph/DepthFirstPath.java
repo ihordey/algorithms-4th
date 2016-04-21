@@ -1,6 +1,7 @@
 package practice.week_1.undirected_graph;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class DepthFirstPath {
     private boolean[] marked;
@@ -22,19 +23,18 @@ public class DepthFirstPath {
                 dfs(graph, w);
             }
         }
-
     }
 
-    public boolean marked(int w) {
+    public boolean hasPathTo(int w) {
         return marked[w];
     }
 
-    public Stack<Integer> path(int w) {
-        final Stack<Integer> result = new Stack<>();
+    public Deque<Integer> path(int w) {
+        final Deque<Integer> result = new LinkedBlockingDeque<>();
 
-        if (marked(w)) {
+        if (hasPathTo(w)) {
            for (int k = w; k != s; k = edgesTo[k]){
-             result.add(k);
+             result.addLast(k);
            }
             result.add(s);
         }

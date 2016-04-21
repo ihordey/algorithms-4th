@@ -3,7 +3,6 @@ package practice.week_1.undirected_graph;
 import stdLib.In;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Graph {
     private ArrayList<Integer>[] adjacencyList;
