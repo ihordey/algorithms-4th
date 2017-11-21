@@ -1,7 +1,8 @@
-package practice.week_1.undirected_graph;
+package practice.graphs.undirected_graph;
 
 import org.junit.Test;
-import practice.week_1.GraphUtils;
+import practice.graphs.GraphsFilePath;
+import stdLib.In;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
@@ -11,7 +12,7 @@ public class DepthFirstPathTest {
 
     @Test
     public void findPath() {
-        final DepthFirstPath dfp = new DepthFirstPath(GraphUtils.tinyGraph(), 0);
+        final DepthFirstPath dfp = new DepthFirstPath(new Graph(new In(GraphsFilePath.TINY_G)), 0);
         assertThat(dfp.path(3), contains(3, 4, 5, 0));
         assertThat(dfp.path(2), contains(2, 0));
         assertThat(dfp.path(7), empty());

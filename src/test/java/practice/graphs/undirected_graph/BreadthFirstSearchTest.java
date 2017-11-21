@@ -1,7 +1,8 @@
-package practice.week_1.undirected_graph;
+package practice.graphs.undirected_graph;
 
 import org.junit.Test;
-import practice.week_1.GraphUtils;
+import practice.graphs.GraphsFilePath;
+import stdLib.In;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -10,7 +11,7 @@ public class BreadthFirstSearchTest {
 
     @Test
     public void isConnected() {
-        final BreadthFirstSearch bfs = new BreadthFirstSearch(GraphUtils.tinyGraph(), 0);
+        BreadthFirstSearch bfs = new BreadthFirstSearch(new Graph(new In(GraphsFilePath.TINY_G)), 0);
         assertThat(bfs.marked(4), is(true));
         assertThat(bfs.marked(3), is(true));
         assertThat(bfs.marked(2), is(true));

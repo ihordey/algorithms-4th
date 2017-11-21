@@ -1,4 +1,4 @@
-package practice.week_1.union_find;
+package practice.union_find;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,9 +13,9 @@ import static practice.common.FilesTest.convertToPairs;
 
 public class QUTest {
     
-    public static final String PATH_TO_TINY_UF_TXT = "/week_1/union_find/tinyUF.txt";
-    public static final String PATH_TO_MEDIUM_UF_TXT = "/week_1/union_find/mediumUF.txt";
-    public static final String PATH_TO_LARGE_UF_TXT = "/week_1/union_find/largeUF.txt";
+    public static final String PATH_TO_TINY_UF_TXT = "/union_find/tinyUF.txt";
+    public static final String PATH_TO_MEDIUM_UF_TXT = "/union_find/mediumUF.txt";
+    public static final String PATH_TO_LARGE_UF_TXT = "/union_find/largeUF.txt";
 
     @Test
     public void testUnion() throws Exception {

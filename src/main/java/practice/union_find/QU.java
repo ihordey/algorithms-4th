@@ -1,4 +1,4 @@
-package practice.week_1.union_find;
+package practice.union_find;
 
 
 public class QU implements DynamicConnectivity<Integer> {

@@ -1,4 +1,4 @@
-package practice.week_1.undirected_graph;
+package practice.graphs.undirected_graph;
 
 import stdLib.In;
 

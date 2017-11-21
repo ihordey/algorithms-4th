@@ -1,4 +1,4 @@
-package practice.week_1.undirected_graph;
+package practice.graphs.undirected_graph;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -6,12 +6,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BreadthFirstSearch {
     private boolean[] marked;
     private int[] edgeTo;
-    private int s;
 
     public BreadthFirstSearch(Graph graph, int s) {
         this.marked = new boolean[graph.vertices()];
         this.edgeTo = new int[graph.vertices()];
-        this.s = s;
         bfs(graph, s);
     }
 

@@ -1,4 +1,4 @@
-package practice.week_1.union_find;
+package practice.union_find;
 
 
 import java.util.stream.Stream;
