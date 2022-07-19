@@ -1,4 +1,4 @@
-package strings.substringSearch;
+package strings.substringSearch.bruteForce;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BruteForceTest {
-    private final BruteForce service = new BruteForce();
+class AlternateBruteForceSearcherTest {
+    private final AlternateBruteForceSearcher service = new AlternateBruteForceSearcher();
 
     @ParameterizedTest
     @MethodSource("getData")
@@ -19,6 +19,7 @@ class BruteForceTest {
 
     private static Stream<Arguments> getData() {
         return Stream.of(
+                Arguments.of("abcde", "we", -1),
                 Arguments.of("ABRA", "ABACADABRAC", 6),
                 Arguments.of("BRAC", "ABACADABRAC", 7)
         );

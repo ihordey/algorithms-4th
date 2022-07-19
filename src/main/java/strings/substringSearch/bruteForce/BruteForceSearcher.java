@@ -1,6 +1,6 @@
-package strings.substringSearch;
+package strings.substringSearch.bruteForce;
 
-public class BruteForce {
+public class BruteForceSearcher {
     public int search(String pat, String txt) {
         final int M = pat.length();
         final int N = txt.length();
