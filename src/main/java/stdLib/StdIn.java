@@ -8,6 +8,7 @@ package stdLib; /***************************************************************
 
 import java.io.BufferedInputStream;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -127,11 +128,7 @@ public final class StdIn {
     /**
      * Return next char from standard input
      */
-    // a complete hack and inefficient - email me if you have a better
     public static char readChar() {
-        // (?s) for DOTALL mode so . matches a line termination character
-        // 1 says look only one character ahead
-        // consider precompiling the pattern
         String s = scanner.findWithinHorizon("(?s).", 1);
         return s.charAt(0);
     }
@@ -140,40 +137,14 @@ public final class StdIn {
      * Return rest of input from standard input
      */
     public static String readAll() {
-        if (!scanner.hasNextLine()) return null;
-
-        // reference: http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html
-        return scanner.useDelimiter("\\A").next();
-    }
-
-   /**
-     * Read rest of input as array of ints
-     */
-    public static int[] readInts() {
-        String[] fields = readAll().trim().split("\\s+");
-        int[] vals = new int[fields.length];
-        for (int i = 0; i < fields.length; i++)
-            vals[i] = Integer.parseInt(fields[i]);
-        return vals;
-    }
-
-   /**
-     * Read rest of input as array of doubles
-     */
-    public static double[] readDoubles() {
-        String[] fields = readAll().trim().split("\\s+");
-        double[] vals = new double[fields.length];
-        for (int i = 0; i < fields.length; i++)
-            vals[i] = Double.parseDouble(fields[i]);
-        return vals;
+        return System.console().readLine();
     }
 
    /**
      * Read rest of input as array of strings
      */
     public static String[] readStrings() {
-        String[] fields = readAll().trim().split("\\s+");
-        return fields;
+        return Objects.requireNonNull(readAll()).trim().split("\\s+");
     }
 
 
