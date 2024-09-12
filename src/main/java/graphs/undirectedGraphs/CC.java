@@ -1,9 +1,5 @@
 package  graphs.undirectedGraphs;
 
-import fundamentals.bagsQueuesStacks.Queue;
-import stdLib.In;
-import stdLib.StdOut;
-
 /*************************************************************************
  *  Compilation:  javac CC.java
  *  Execution:    java CC filename.txt
@@ -27,26 +23,26 @@ public class CC {
     private int[] size;         // size[v] = number of vertices in component containing v
     private int count;          // number of connected components
 
-    public CC(Graph G) {
-        marked = new boolean[G.V()];
-        id = new int[G.V()];
-        size = new int[G.V()];
-        for (int v = 0; v < G.V(); v++) {
+    public CC(Graph graph) {
+        marked = new boolean[graph.v()];
+        id = new int[graph.v()];
+        size = new int[graph.v()];
+        for (int v = 0; v < graph.v(); v++) {
             if (!marked[v]) {
-                dfs(G, v);
+                dfs(graph, v);
                 count++;
             }
         }
     }
 
     // depth first search
-    private void dfs(Graph G, int v) {
+    private void dfs(Graph graph, int v) {
         marked[v] = true;
         id[v] = count;
         size[v]++;
-        for (int w : G.adj(v)) {
+        for (int w : graph.adj(v)) {
             if (!marked[w]) {
-                dfs(G, w);
+                dfs(graph, w);
             }
         }
     }
@@ -69,34 +65,5 @@ public class CC {
     // are v and w in the same connected component?
     public boolean areConnected(int v, int w) {
         return id(v) == id(w);
-    }
-
-
-    // test client
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        Graph G = new Graph(in);
-        CC cc = new CC(G);
-
-        // number of connected components
-        int M = cc.count();
-        StdOut.println(M + " components");
-
-        // compute list of vertices in each connected component
-        Queue<Integer>[] components = (Queue<Integer>[]) new Queue[M];
-        for (int i = 0; i < M; i++) {
-            components[i] = new Queue<Integer>();
-        }
-        for (int v = 0; v < G.V(); v++) {
-            components[cc.id(v)].enqueue(v);
-        }
-
-        // print results
-        for (int i = 0; i < M; i++) {
-            for (int v : components[i]) {
-                StdOut.print(v + " ");
-            }
-            StdOut.println();
-        }
     }
 }

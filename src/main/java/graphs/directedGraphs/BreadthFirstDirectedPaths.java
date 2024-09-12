@@ -45,35 +45,15 @@ public class BreadthFirstDirectedPaths {
         bfs(G, s);
     }
 
-    // multiple sources
-    public BreadthFirstDirectedPaths(Digraph G, Iterable<Integer> sources) {
-        marked = new boolean[G.V()];
-        distTo = new int[G.V()];
-        edgeTo = new int[G.V()];
-        for (int v = 0; v < G.V(); v++) distTo[v] = INFINITY;
-        bfs(G, sources);
-    }
-
     // BFS from single source
     private void bfs(Digraph G, int s) {
         Queue<Integer> q = new Queue<Integer>();
         marked[s] = true;
         distTo[s] = 0;
         q.enqueue(s);
-        while (!q.isEmpty()) {
-            int v = q.dequeue();
-            for (int w : G.adj(v)) {
-                if (!marked[w]) {
-                    edgeTo[w] = v;
-                    distTo[w] = distTo[v] + 1;
-                    marked[w] = true;
-                    q.enqueue(w);
-                }
-            }
-        }
+        bfsLogic(G, q);
     }
 
-    // BFS from multiple sources
     private void bfs(Digraph G, Iterable<Integer> sources) {
         Queue<Integer> q = new Queue<Integer>();
         for (int s : sources) {
@@ -81,6 +61,10 @@ public class BreadthFirstDirectedPaths {
             distTo[s] = 0;
             q.enqueue(s);
         }
+        bfsLogic(G, q);
+    }
+
+    private void bfsLogic(Digraph G, Queue<Integer> q) {
         while (!q.isEmpty()) {
             int v = q.dequeue();
             for (int w : G.adj(v)) {

@@ -7,6 +7,7 @@ package stdLib; /***************************************************************
  *************************************************************************/
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -151,13 +152,24 @@ public final class StdIn {
     }
 
 
-    public static String[] readFile(String relativePath)  {
+    public static String[] readFileFromResources(String fileName) {
+        try (var is = StdIn.class.getResourceAsStream(fileName)) {
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
-            return  Files.readAllLines(Paths.get(relativePath)).toArray(new String[0]);
+            return Files.readAllLines(Paths.get(fileName)).toArray(new String[0]);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static File readFile(String relativePath) {
+        return null;
+    }
+
 
     /**
      * Unit test

@@ -39,8 +39,8 @@ public class DepthFirstPaths {
 
     public DepthFirstPaths(Graph G, int s) {
         this.s = s;
-        edgeTo = new int[G.V()];
-        marked = new boolean[G.V()];
+        edgeTo = new int[G.v()];
+        marked = new boolean[G.v()];
         dfs(G, s);
     }
 
@@ -76,7 +76,7 @@ public class DepthFirstPaths {
         int s = Integer.parseInt(args[1]);
         DepthFirstPaths dfs = new DepthFirstPaths(G, s);
 
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             if (dfs.hasPathTo(v)) {
                 StdOut.printf("%d to %d:  ", s, v);
                 for (int x : dfs.pathTo(v)) {

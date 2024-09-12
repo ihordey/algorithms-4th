@@ -6,18 +6,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static sorting.mergesort.MergeTestUtils.isSorted;
-import static stdLib.StdIn.readFile;
+import static stdLib.StdIn.readFileFromResources;
 
 class MergeBUTest {
     public static Stream<Arguments> getTestData() {
         return Stream.of(
                 Arguments.of(
-                        (Object)readFile("src/main/java/sorting/mergesort/words3.txt")
+                        (Object) readFileFromResources("src/main/java/sorting/mergesort/words3.txt")
                 ),
                 Arguments.of(
-                        (Object) readFile("src/main/java/sorting/mergesort/tiny.txt")
+                        (Object) readFileFromResources("src/main/java/sorting/mergesort/tiny.txt")
                 )
         );
     }

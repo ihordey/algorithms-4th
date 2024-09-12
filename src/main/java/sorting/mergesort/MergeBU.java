@@ -1,11 +1,6 @@
 package sorting.mergesort;
 
-import stdLib.StdIn;
-import stdLib.StdOut;
-
 import static sorting.mergesort.MergeUtils.merge;
-import static sorting.mergesort.MergeUtils.show;
-import static stdLib.StdIn.readFile;
 
 /*************************************************************************
  *  Compilation:  javac MergeBU.java

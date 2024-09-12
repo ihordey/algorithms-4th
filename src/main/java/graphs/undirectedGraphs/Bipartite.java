@@ -23,11 +23,11 @@ public class Bipartite {
 
     public Bipartite(Graph G) {
         isBipartite = true;
-        color  = new boolean[G.V()];
-        marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        color = new boolean[G.v()];
+        marked = new boolean[G.v()];
+        edgeTo = new int[G.v()];
 
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             if (!marked[v]) {
 //                color[v] = false;
                 dfs(G, v);
@@ -67,36 +67,6 @@ public class Bipartite {
     boolean color(int v)             { return color[v];    }
     public Iterable<Integer> cycle() { return cycle;       }
 
-    private boolean check(Graph G) {
-        // graph is bipartite
-        if (isBipartite) {
-            for (int v = 0; v < G.V(); v++) {
-                for (int w : G.adj(v)) {
-                    if (color[v] == color[w]) {
-                        System.err.printf("edge %d-%d with %d and %d in same side of bipartition\n", v, w, v, w);
-                        return false;
-                    }
-                }
-            }
-        }
-
-        // graph has an odd-length cycle
-        else {
-            // verify cycle
-            int first = -1, last = -1;
-            for (int v : cycle()) {
-                if (first == -1) first = v;
-                last = v;
-            }
-            if (first != last) {
-                System.err.printf("cycle begins with %d and ends with %d\n", first, last);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) {
         // create random bipartite graph with V vertices and E edges; then add F random edges
         int V = Integer.parseInt(args[0]);
@@ -126,7 +96,7 @@ public class Bipartite {
         Bipartite b = new Bipartite(G);
         if (b.isBipartite()) {
             StdOut.println("Graph is bipartite");
-            for (int v = 0; v < G.V(); v++) {
+            for (int v = 0; v < G.v(); v++) {
                 StdOut.println(v + ": " + b.color(v));
             }
         }
@@ -137,6 +107,36 @@ public class Bipartite {
             }
             StdOut.println();
         }
+    }
+
+    private boolean check(Graph G) {
+        // graph is bipartite
+        if (isBipartite) {
+            for (int v = 0; v < G.v(); v++) {
+                for (int w : G.adj(v)) {
+                    if (color[v] == color[w]) {
+                        System.err.printf("edge %d-%d with %d and %d in same side of bipartition\n", v, w, v, w);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // graph has an odd-length cycle
+        else {
+            // verify cycle
+            int first = -1, last = -1;
+            for (int v : cycle()) {
+                if (first == -1) first = v;
+                last = v;
+            }
+            if (first != last) {
+                System.err.printf("cycle begins with %d and ends with %d\n", first, last);
+                return false;
+            }
+        }
+
+        return true;
     }
 
 

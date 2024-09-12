@@ -38,7 +38,6 @@ package  graphs.undirectedGraphs;
 import fundamentals.bagsQueuesStacks.Bag;
 import fundamentals.bagsQueuesStacks.Stack;
 import stdLib.In;
-import stdLib.StdOut;
 
 /**
  *  The <tt>Graph</tt> class represents an undirected graph of vertices
@@ -53,13 +52,13 @@ import stdLib.StdOut;
 public class Graph {
     private final int V;
     private int E;
-    private Bag<Integer>[] adj;
+    private final Bag<Integer>[] adj;
     
    /**
      * Create an empty graph with V vertices.
      */
     public Graph(int V) {
-        if (V < 0) throw new RuntimeException("Number of vertices must be nonnegative");
+        if (V < 0) throw new RuntimeException("Number of vertices must be non negative");
         this.V = V;
         this.E = 0;
         adj = (Bag<Integer>[]) new Bag[V];
@@ -99,9 +98,9 @@ public class Graph {
      * Copy constructor.
      */
     public Graph(Graph G) {
-        this(G.V());
+        this(G.v());
         this.E = G.E();
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             // reverse so that adjacency list is in same order as original
             Stack<Integer> reverse = new Stack<Integer>();
             for (int w : G.adj[v]) {
@@ -113,30 +112,20 @@ public class Graph {
         }
     }
 
-   /**
-     * Return the number of vertices in the graph.
-     */
-    public int V() { return V; }
+    public int v() {
+        return V;
+    }
 
-   /**
-     * Return the number of edges in the graph.
-     */
+
     public int E() { return E; }
 
 
-   /**
-     * Add the edge v-w to graph.
-     */
     public void addEdge(int v, int w) {
         E++;
         adj[v].add(w);
         adj[w].add(v);
     }
 
-
-   /**
-     * Return the list of neighbors of vertex v as in Iterable.
-     */
     public Iterable<Integer> adj(int v) {
         return adj[v];
     }
@@ -147,26 +136,17 @@ public class Graph {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        String NEWLINE = System.getProperty("line.separator");
-        s.append(V + " vertices, " + E + " edges " + NEWLINE);
+        s.append(V)
+                .append(" vertices, ")
+                .append(E).append(" edges ")
+                .append(System.lineSeparator());
         for (int v = 0; v < V; v++) {
-            s.append(v + ": ");
+            s.append(v).append(": ");
             for (int w : adj[v]) {
-                s.append(w + " ");
+                s.append(w).append(" ");
             }
-            s.append(NEWLINE);
+            s.append(System.lineSeparator());
         }
         return s.toString();
     }
-
-
-   /**
-     * Test client.
-     */
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        Graph G = new Graph(in);
-        StdOut.println(G);
-    }
-
 }

@@ -20,9 +20,9 @@ public class Cycle {
     public Cycle(Graph G) {
         if (hasSelfLoop(G)) return;
         if (hasParallelEdges(G)) return;
-        marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        marked = new boolean[G.v()];
+        edgeTo = new int[G.v()];
+        for (int v = 0; v < G.v(); v++)
             if (!marked[v])
                 dfs(G, -1, v);
     }
@@ -31,7 +31,7 @@ public class Cycle {
     // does this graph have a self loop?
     // side effect: initialize cycle to be self loop
     private boolean hasSelfLoop(Graph G) {
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             for (int w : G.adj(v)) {
                 if (v == w) {
                     cycle = new Stack<Integer>();
@@ -47,9 +47,9 @@ public class Cycle {
     // does this graph have two parallel edges?
     // side effect: initialize cycle to be two parallel edges
     private boolean hasParallelEdges(Graph G) {
-        marked = new boolean[G.V()];
+        marked = new boolean[G.v()];
 
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
 
             // check for parallel edges incident to v
             for (int w : G.adj(v)) {
