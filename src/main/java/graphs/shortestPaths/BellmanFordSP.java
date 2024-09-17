@@ -42,10 +42,10 @@ public class BellmanFordSP {
     private Iterable<DirectedEdge> cycle;  // negative cycle (or null if no such cycle)
 
     public BellmanFordSP(EdgeWeightedDigraph G, int s) {
-        distTo  = new double[G.V()];
-        edgeTo  = new DirectedEdge[G.V()];
-        onQueue = new boolean[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        distTo  = new double[G.v()];
+        edgeTo  = new DirectedEdge[G.v()];
+        onQueue = new boolean[G.v()];
+        for (int v = 0; v < G.v(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
         distTo[s] = 0.0;
 
@@ -74,7 +74,7 @@ public class BellmanFordSP {
                     onQueue[w] = true;
                 }
             }
-            if (cost++ % G.V() == 0)
+            if (cost++ % G.v() == 0)
                 findNegativeCycle();
         }
     }
@@ -150,7 +150,7 @@ public class BellmanFordSP {
                 System.err.println("distanceTo[s] and edgeTo[s] inconsistent");
                 return false;
             }
-            for (int v = 0; v < G.V(); v++) {
+            for (int v = 0; v < G.v(); v++) {
                 if (v == s) continue;
                 if (edgeTo[v] == null && distTo[v] != Double.POSITIVE_INFINITY) {
                     System.err.println("distTo[] and edgeTo[] inconsistent");
@@ -159,7 +159,7 @@ public class BellmanFordSP {
             }
 
             // check that all edges e = v->w satisfy distTo[w] <= distTo[v] + e.weight()
-            for (int v = 0; v < G.V(); v++) {
+            for (int v = 0; v < G.v(); v++) {
                 for (DirectedEdge e : G.adj(v)) {
                     int w = e.to();
                     if (distTo[v] + e.weight() < distTo[w]) {
@@ -170,7 +170,7 @@ public class BellmanFordSP {
             }
 
             // check that all edges e = v->w on SPT satisfy distTo[w] == distTo[v] + e.weight()
-            for (int w = 0; w < G.V(); w++) {
+            for (int w = 0; w < G.v(); w++) {
                 if (edgeTo[w] == null) continue;
                 DirectedEdge e = edgeTo[w];
                 int v = e.from();
@@ -204,7 +204,7 @@ public class BellmanFordSP {
 
         // print shortest paths
         else {
-            for (int v = 0; v < G.V(); v++) {
+            for (int v = 0; v < G.v(); v++) {
                 if (sp.hasPathTo(v)) {
                     StdOut.printf("%d to %d (%5.2f)  ", s, v, sp.distTo(v));
                     for (DirectedEdge e : sp.pathTo(v)) {

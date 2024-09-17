@@ -42,14 +42,14 @@ public class DijkstraSP {
     private IndexMinPQ<Double> pq;    // priority queue of vertices
 
     public DijkstraSP(EdgeWeightedDigraph G, int s) {
-        distTo = new double[G.V()];
-        edgeTo = new DirectedEdge[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        distTo = new double[G.v()];
+        edgeTo = new DirectedEdge[G.v()];
+        for (int v = 0; v < G.v(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
         distTo[s] = 0.0;
 
         // relax vertices in order of distance from s
-        pq = new IndexMinPQ<Double>(G.V());
+        pq = new IndexMinPQ<Double>(G.v());
         pq.insert(s, distTo[s]);
         while (!pq.isEmpty()) {
             int v = pq.delMin();
@@ -111,7 +111,7 @@ public class DijkstraSP {
             System.err.println("distTo[s] and edgeTo[s] inconsistent");
             return false;
         }
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             if (v == s) continue;
             if (edgeTo[v] == null && distTo[v] != Double.POSITIVE_INFINITY) {
                 System.err.println("distTo[] and edgeTo[] inconsistent");
@@ -120,7 +120,7 @@ public class DijkstraSP {
         }
 
         // check that all edges e = v->w satisfy distTo[w] <= distTo[v] + e.weight()
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             for (DirectedEdge e : G.adj(v)) {
                 int w = e.to();
                 if (distTo[v] + e.weight() < distTo[w]) {
@@ -131,7 +131,7 @@ public class DijkstraSP {
         }
 
         // check that all edges e = v->w on SPT satisfy distTo[w] == distTo[v] + e.weight()
-        for (int w = 0; w < G.V(); w++) {
+        for (int w = 0; w < G.v(); w++) {
             if (edgeTo[w] == null) continue;
             DirectedEdge e = edgeTo[w];
             int v = e.from();
@@ -155,7 +155,7 @@ public class DijkstraSP {
 
 
         // print shortest path
-        for (int t = 0; t < G.V(); t++) {
+        for (int t = 0; t < G.v(); t++) {
             if (sp.hasPathTo(t)) {
                 StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t));
                 if (sp.hasPathTo(t)) {

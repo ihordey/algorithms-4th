@@ -77,9 +77,9 @@ public class EdgeWeightedDigraph {
      * Copy constructor.
      */
     public EdgeWeightedDigraph(EdgeWeightedDigraph G) {
-        this(G.V());
+        this(G.v());
         this.E = G.E();
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             // reverse so that adjacency list is in same order as original
             Stack<DirectedEdge> reverse = new Stack<DirectedEdge>();
             for (DirectedEdge e : G.adj[v]) {
@@ -94,7 +94,7 @@ public class EdgeWeightedDigraph {
    /**
      * Return the number of vertices in this digraph.
      */
-    public int V() {
+    public int v() {
         return V;
     }
 

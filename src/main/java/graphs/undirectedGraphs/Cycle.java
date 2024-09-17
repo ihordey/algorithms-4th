@@ -1,7 +1,6 @@
 package  graphs.undirectedGraphs;
 
 import fundamentals.bagsQueuesStacks.Stack;
-import stdLib.StdOut;
 
 /*************************************************************************
  *  Compilation:  javac Cycle.java
@@ -17,24 +16,21 @@ public class Cycle {
     private int[] edgeTo;
     private Stack<Integer> cycle;
 
-    public Cycle(Graph G) {
-        if (hasSelfLoop(G)) return;
-        if (hasParallelEdges(G)) return;
-        marked = new boolean[G.v()];
-        edgeTo = new int[G.v()];
-        for (int v = 0; v < G.v(); v++)
+    public Cycle(Graph graph) {
+        if (hasSelfLoop(graph)) return;
+        if (hasParallelEdges(graph)) return;
+        marked = new boolean[graph.v()];
+        edgeTo = new int[graph.v()];
+        for (int v = 0; v < graph.v(); v++)
             if (!marked[v])
-                dfs(G, -1, v);
+                dfs(graph, -1, v);
     }
 
-
-    // does this graph have a self loop?
-    // side effect: initialize cycle to be self loop
-    private boolean hasSelfLoop(Graph G) {
-        for (int v = 0; v < G.v(); v++) {
-            for (int w : G.adj(v)) {
+    private boolean hasSelfLoop(Graph graph) {
+        for (int v = 0; v < graph.v(); v++) {
+            for (int w : graph.adj(v)) {
                 if (v == w) {
-                    cycle = new Stack<Integer>();
+                    cycle = new Stack<>();
                     cycle.push(v);
                     cycle.push(v);
                     return true;
@@ -44,17 +40,12 @@ public class Cycle {
         return false;
     }
 
-    // does this graph have two parallel edges?
-    // side effect: initialize cycle to be two parallel edges
-    private boolean hasParallelEdges(Graph G) {
-        marked = new boolean[G.v()];
-
-        for (int v = 0; v < G.v(); v++) {
-
-            // check for parallel edges incident to v
-            for (int w : G.adj(v)) {
+    private boolean hasParallelEdges(Graph graph) {
+        marked = new boolean[graph.v()];
+        for (int v = 0; v < graph.v(); v++) {
+            for (int w : graph.adj(v)) {
                 if (marked[w]) {
-                    cycle = new Stack<Integer>();
+                    cycle = new Stack<>();
                     cycle.push(v);
                     cycle.push(w);
                     cycle.push(v);
@@ -62,9 +53,7 @@ public class Cycle {
                 }
                 marked[w] = true;
             }
-
-            // reset so marked[v] = false for all v
-            for (int w : G.adj(v)) {
+            for (int w : graph.adj(v)) {
                 marked[w] = false;
             }
         }
@@ -74,21 +63,16 @@ public class Cycle {
     public boolean hasCycle()        { return cycle != null; }
     public Iterable<Integer> cycle() { return cycle;         }
 
-    private void dfs(Graph G, int u, int v) {
+    private void dfs(Graph graph, int u, int v) {
         marked[v] = true;
-        for (int w : G.adj(v)) {
-
-            // short circuit if cycle already found
+        for (int w : graph.adj(v)) {
             if (cycle != null) return;
-
             if (!marked[w]) {
                 edgeTo[w] = v;
-                dfs(G, v, w);
+                dfs(graph, v, w);
             }
-
-            // check for cycle (but disregard reverse of edge leading to v)
             else if (w != u) {
-                cycle = new Stack<Integer>();
+                cycle = new Stack<>();
                 for (int x = v; x != w; x = edgeTo[x]) {
                     cycle.push(x);
                 }
@@ -97,26 +81,5 @@ public class Cycle {
             }
         }
     }
-
-    // test client
-    public static void main(String[] args) {
-        int V = Integer.parseInt(args[0]);
-        int E = Integer.parseInt(args[1]);
-        Graph G = new Graph(V, E);
-        StdOut.println(G);
-
-        Cycle finder = new Cycle(G);
-        if (finder.hasCycle()) {
-            for (int v : finder.cycle()) {
-                StdOut.print(v + " ");
-            }
-            StdOut.println();
-        }
-        else {
-            StdOut.println("Graph is acyclic");
-        }
-    }
-
-
 }
 

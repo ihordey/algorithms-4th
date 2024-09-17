@@ -32,9 +32,9 @@ public class AcyclicSP {
     private DirectedEdge[] edgeTo;   // edgeTo[v] = last edge on shortest s->v path
 
     public AcyclicSP(EdgeWeightedDigraph G, int s) {
-        distTo = new double[G.V()];
-        edgeTo = new DirectedEdge[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        distTo = new double[G.v()];
+        edgeTo = new DirectedEdge[G.v()];
+        for (int v = 0; v < G.v(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
         distTo[s] = 0.0;
 
@@ -84,7 +84,7 @@ public class AcyclicSP {
 
         // find shortest path from s to each other vertex in DAG
         AcyclicSP sp = new AcyclicSP(G, s);
-        for (int v = 0; v < G.V(); v++) {
+        for (int v = 0; v < G.v(); v++) {
             if (sp.hasPathTo(v)) {
                 StdOut.printf("%d to %d (%.2f)  ", s, v, sp.distTo(v));
                 for (DirectedEdge e : sp.pathTo(v)) {

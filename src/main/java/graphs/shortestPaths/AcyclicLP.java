@@ -2,8 +2,6 @@ package  graphs.shortestPaths;
 
 import fundamentals.bagsQueuesStacks.Stack;
 import graphs.directedGraphs.Topological;
-import stdLib.In;
-import stdLib.StdOut;
 
 /*************************************************************************
  *  Compilation:  javac AcyclicLP.java
@@ -31,16 +29,15 @@ public class AcyclicLP {
     private double[] distTo;          // distTo[v] = distance  of longest s->v path
     private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on longest s->v path
 
-    public AcyclicLP(EdgeWeightedDigraph G, int s) {
-        distTo = new double[G.V()];
-        edgeTo = new DirectedEdge[G.V()];
-        for (int v = 0; v < G.V(); v++) distTo[v] = Double.NEGATIVE_INFINITY;
+    public AcyclicLP(EdgeWeightedDigraph graph, int s) {
+        distTo = new double[graph.v()];
+        edgeTo = new DirectedEdge[graph.v()];
+        for (int v = 0; v < graph.v(); v++) distTo[v] = Double.NEGATIVE_INFINITY;
         distTo[s] = 0.0;
 
-        // relax vertices in toplogical order
-        Topological topological = new Topological(G);
+        Topological topological = new Topological(graph);
         for (int v : topological.order()) {
-            for (DirectedEdge e : G.adj(v))
+            for (DirectedEdge e : graph.adj(v))
                 relax(e);
         }
     }
@@ -53,18 +50,14 @@ public class AcyclicLP {
             edgeTo[w] = e;
         }       
     }
-
-    // return length of the longest path from s to v, -infinity if no such path
     public double distTo(int v) {
         return distTo[v];
     }
 
-    //  is there a  path from s to v?
     public boolean hasPathTo(int v) {
         return distTo[v] > Double.NEGATIVE_INFINITY;
     }
 
-    // return view of longest path from s to v, null if no such path
     public Iterable<DirectedEdge> pathTo(int v) {
         if (!hasPathTo(v)) return null;
         Stack<DirectedEdge> path = new Stack<DirectedEdge>();
@@ -72,28 +65,5 @@ public class AcyclicLP {
             path.push(e);
         }
         return path;
-    }
-
-
-
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        int s = Integer.parseInt(args[1]);
-        EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
-
-        AcyclicLP lp = new AcyclicLP(G, s);
-
-        for (int v = 0; v < G.V(); v++) {
-            if (lp.hasPathTo(v)) {
-                StdOut.printf("%d to %d (%.2f)  ", s, v, lp.distTo(v));
-                for (DirectedEdge e : lp.pathTo(v)) {
-                    StdOut.print(e + "   ");
-                }
-                StdOut.println();
-            }
-            else {
-                StdOut.printf("%d to %d         no path\n", s, v);
-            }
-        }
     }
 }

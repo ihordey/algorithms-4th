@@ -47,12 +47,10 @@ public class CC {
         }
     }
 
-    // id of connected component containing v
     public int id(int v) {
         return id[v];
     }
 
-    // size of connected component containing v
     public int size(int v) {
         return size[id[v]];
     }

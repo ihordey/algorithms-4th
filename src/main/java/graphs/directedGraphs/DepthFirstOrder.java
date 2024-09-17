@@ -62,12 +62,12 @@ public class DepthFirstOrder {
 
     // depth-first search preorder and postorder in an edge-weighted digraph
     public DepthFirstOrder(EdgeWeightedDigraph G) {
-        pre    = new int[G.V()];
-        post   = new int[G.V()];
+        pre    = new int[G.v()];
+        post   = new int[G.v()];
         postorder = new Queue<Integer>();
         preorder  = new Queue<Integer>();
-        marked    = new boolean[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        marked    = new boolean[G.v()];
+        for (int v = 0; v < G.v(); v++)
             if (!marked[v]) dfs(G, v);
     }
 

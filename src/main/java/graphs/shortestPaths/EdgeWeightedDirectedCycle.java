@@ -22,10 +22,10 @@ public class EdgeWeightedDirectedCycle {
     private Stack<DirectedEdge> cycle;    // directed cycle (or null if no such cycle)
 
     public EdgeWeightedDirectedCycle(EdgeWeightedDigraph G) {
-        marked  = new boolean[G.V()];
-        onStack = new boolean[G.V()];
-        edgeTo  = new DirectedEdge[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        marked  = new boolean[G.v()];
+        onStack = new boolean[G.v()];
+        edgeTo  = new DirectedEdge[G.v()];
+        for (int v = 0; v < G.v(); v++)
             if (!marked[v]) dfs(G, v);
 
         // check that digraph has a cycle

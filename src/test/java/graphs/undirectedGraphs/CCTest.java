@@ -13,21 +13,19 @@ class CCTest {
         final var graph = GraphTestUtils.getGraph("./src/test/resources/tinyG.txt");
         CC cc = new CC(graph);
 
-        // number of connected components
-        int M = cc.count();
-        StdOut.println(M + " components");
+        int count = cc.count();
+        StdOut.println(count + " components");
 
-        // compute list of vertices in each connected component
-        Queue<Integer>[] components = (Queue<Integer>[]) new Queue[M];
-        for (int i = 0; i < M; i++) {
-            components[i] = new Queue<Integer>();
+        var components = (Queue<Integer>[]) new Queue[count];
+        for (int i = 0; i < count; i++) {
+            components[i] = new Queue<>();
         }
         for (int v = 0; v < graph.v(); v++) {
             components[cc.id(v)].enqueue(v);
         }
 
         // print results
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < count; i++) {
             for (int v : components[i]) {
                 StdOut.print(v + " ");
             }
