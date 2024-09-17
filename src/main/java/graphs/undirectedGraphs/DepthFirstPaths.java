@@ -1,8 +1,6 @@
 package  graphs.undirectedGraphs;
 
 import fundamentals.bagsQueuesStacks.Stack;
-import stdLib.In;
-import stdLib.StdOut;
 
 /*************************************************************************
  *  Compilation:  javac DepthFirstPaths.java
@@ -37,60 +35,33 @@ public class DepthFirstPaths {
     private int[] edgeTo;        // edgeTo[v] = last edge on s-v path
     private final int s;         // source vertex
 
-    public DepthFirstPaths(Graph G, int s) {
+    public DepthFirstPaths(Graph graph, int s) {
         this.s = s;
-        edgeTo = new int[G.v()];
-        marked = new boolean[G.v()];
-        dfs(G, s);
+        edgeTo = new int[graph.v()];
+        marked = new boolean[graph.v()];
+        dfs(graph, s);
     }
 
-    // depth first search from v
-    private void dfs(Graph G, int v) {
+    private void dfs(Graph graph, int v) {
         marked[v] = true;
-        for (int w : G.adj(v)) {
+        for (int w : graph.adj(v)) {
             if (!marked[w]) {
                 edgeTo[w] = v;
-                dfs(G, w);
+                dfs(graph, w);
             }
         }
     }
 
-    // is there a path between s and v?
     public boolean hasPathTo(int v) {
         return marked[v];
     }
 
-    // return a path between s to v; null if no such path
     public Iterable<Integer> pathTo(int v) {
         if (!hasPathTo(v)) return null;
-        Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<>();
         for (int x = v; x != s; x = edgeTo[x])
             path.push(x);
         path.push(s);
         return path;
     }
-
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        Graph G = new Graph(in);
-        int s = Integer.parseInt(args[1]);
-        DepthFirstPaths dfs = new DepthFirstPaths(G, s);
-
-        for (int v = 0; v < G.v(); v++) {
-            if (dfs.hasPathTo(v)) {
-                StdOut.printf("%d to %d:  ", s, v);
-                for (int x : dfs.pathTo(v)) {
-                    if (x == s) StdOut.print(x);
-                    else        StdOut.print("-" + x);
-                }
-                StdOut.println();
-            }
-
-            else {
-                StdOut.printf("%d to %d:  not connected\n", s, v);
-            }
-
-        }
-    }
-
 }
